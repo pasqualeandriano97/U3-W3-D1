@@ -1,11 +1,17 @@
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row, Spinner } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
+import { removeFromFavourites } from "../redux/actions/index";
+import { useEffect } from "react";
+import { resetSearch } from "../redux/actions/index";
 const FavouritesComponent = () => {
   const favouritesList = useSelector((state) => state.favourites.content);
+
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(resetSearch());
+  }, []);
   return (
     <>
       <div className="d-flex justify-content-center flex-column mb-3">
@@ -26,12 +32,7 @@ const FavouritesComponent = () => {
                   <Button
                     variant="danger"
                     className="ms-auto"
-                    onClick={() =>
-                      dispatch({
-                        type: "REMOVE_FROM_FAVOURITES",
-                        payload: element._id,
-                      })
-                    }
+                    onClick={() => dispatch(removeFromFavourites(element._id))}
                   >
                     Remove from Favourite List
                   </Button>

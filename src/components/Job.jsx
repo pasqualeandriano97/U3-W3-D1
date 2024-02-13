@@ -2,11 +2,11 @@ import { Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { addToFavourites } from "../redux/actions/index";
 
 const Job = ({ data }) => {
   const dispatch = useDispatch();
   const params = useParams();
-  console.log(params);
 
   return (
     <Row
@@ -24,9 +24,7 @@ const Job = ({ data }) => {
           <Button
             variant="success"
             className="ms-5"
-            onClick={() =>
-              dispatch({ type: "ADD_TO_FAVOURITES", payload: data })
-            }
+            onClick={() => dispatch(addToFavourites(data))}
           >
             Add to Favourites
           </Button>
